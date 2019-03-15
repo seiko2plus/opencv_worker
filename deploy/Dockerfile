@@ -1,25 +1,21 @@
-FROM debian:stretch
+FROM ubuntu:bionic
 
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
+# add xenial for gcc-4.9
+RUN echo "deb http://ports.ubuntu.com/ubuntu-ports xenial main universe" >> /etc/apt/sources.list
+
 RUN apt-get update \
  && apt-get install -y apt-utils build-essential gdb valgrind cmake git pkg-config curl \
+                       g++-4.9 g++-5 g++-6 g++-7 g++-8 clang-4.0 clang-5.0 clang-6.0 \
  && apt-get clean
-
-# unstable
-RUN echo "deb http://ftp.us.debian.org/debian unstable main contrib" >> /etc/apt/sources.list \
- && apt-get update \
- && apt-get install -y g++-5 g++-6 g++-7 clang-4.0 clang-5.0 clang-6.0
-
-# for gcc 4
-RUN echo "deb http://ftp.us.debian.org/debian/ jessie main contrib" >> /etc/apt/sources.list \
- && apt-get update \
- && apt-get install -y g++-4.9
 
 WORKDIR /usr/src
 
 # build ffmpeg
-RUN apt-get install -y libpng-dev libjpeg-dev libvpx-dev libx264-dev libx265-dev
+RUN apt-get update \
+ && apt-get install -y libpng-dev libjpeg-dev libvpx-dev libx264-dev libx265-dev \
+ && apt-get clean
 
 ARG FFMPEG_VER=3.4.2
 ARG FFMPEG_DEBUG_LEVEL=0
