@@ -3,8 +3,8 @@
 apt-get install -y python3-pip
 pip3 install buildbot-worker
 
-groupadd -r buildbot -g 1000
-useradd -u 1000 -r -g buildbot -m -d /worker/buildbot -s /bin/bash -c "buildbot user" buildbot
+groupadd -r $APP_GID -g 1000
+useradd -u $APP_UID -r -g buildbot -m -d /worker/buildbot -s /bin/bash -c "buildbot user" buildbot
 
 if [ ! -d /worker/buildbot ]; then
 	mkdir /worker/buildbot
