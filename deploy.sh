@@ -6,8 +6,8 @@ if [ ! -f deploy/env.sh ]; then
   cat > deploy/env.sh <<EOF
 export APP_UID=$UID
 export APP_GID=$GROUPS
-export WORKER_HOST=xxx
-export WORKER_PORT=9989
+export MASTER_HOSTNAME=xxx
+export MASTER_PORT=9989
 export WORKER_NAME=xxx
 export WORKER_PASS=XXX
 EOF

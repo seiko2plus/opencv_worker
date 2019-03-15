@@ -1,4 +1,9 @@
 #!/bin/bash
+
+if [ -f /worker/deploy/env.sh ]; then
+    . /worker/deploy/env.sh
+fi
+
 if [ -d /worker/buildbot ]; then
 	echo "Preparation step have been done. Remove buildbot dir to run it again"
 else
