@@ -9,7 +9,7 @@ RUN echo "deb http://ports.ubuntu.com/ubuntu-ports bionic main universe" >> /etc
 
 RUN apt-get update \
  && apt-get install -y apt-utils build-essential gdb valgrind cmake git pkg-config curl \
-                       g++-4.9 g++-5 g++-6 g++-7 g++-8 clang-4.0 clang-5.0 clang-6.0 \
+                       g++-4.9 g++-5 g++-6 g++-7 g++-8 clang-4.0 clang-5.0 clang-6.0 ccache \
  && apt-get clean
 
 WORKDIR /usr/src
