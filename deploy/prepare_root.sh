@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# enable ccache for clang, gcc already enabled by repo pkg
+for value in 4.0 5.0 6.0 7.0
+do
+    ln -sf /usr/bin/ccache /usr/lib/ccache/clang++-$value
+    ln -sf /usr/bin/ccache /usr/lib/ccache/clang-$value
+done
+
 apt-get install -y python3-pip
 pip3 install buildbot-worker
 
@@ -16,3 +23,4 @@ usermod -a -G buildbot www-data
 cp /worker/deploy/nginx.conf /etc/nginx/sites-enabled/default
 
 echo '*/59 * * * * buildbot /worker/deploy/sync.sh >> /dev/null 2>&1' > /etc/cron.d/gitsync
+
